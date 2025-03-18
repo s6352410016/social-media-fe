@@ -8,6 +8,8 @@ services:
     restart: always
     env_file:
       - .env
+    environment:
+      - NODE_OPTIONS=--max-old-space-size=1024  
 
   nginx:
     image: nginx:alpine
