@@ -1,26 +1,26 @@
-# ใช้ Node.js เป็น base image
-FROM node:22.14.0-alpine AS build
+# # ใช้ Node.js เป็น base image
+# FROM node:22.14.0-alpine AS build
 
-# ตั้ง working directory
-WORKDIR /app
+# # ตั้ง working directory
+# WORKDIR /app
 
-# คัดลอกไฟล์ package.json และ package-lock.json
-COPY package*.json ./
+# # คัดลอกไฟล์ package.json และ package-lock.json
+# COPY package*.json ./
 
-# ติดตั้ง dependencies
-RUN npm install
+# # ติดตั้ง dependencies
+# RUN npm install
 
-# คัดลอกโค้ดทั้งหมด
-COPY . .
+# # คัดลอกโค้ดทั้งหมด
+# COPY . .
 
-# สร้างโปรเจ็กต์ React
-RUN npm run build
+# # สร้างโปรเจ็กต์ React
+# RUN npm run build
 
 # ใช้ Nginx เพื่อเสิร์ฟไฟล์ static
 FROM nginx:alpine
 
 # คัดลอกไฟล์ที่ build แล้วไปยัง Nginx
-COPY --from=build /app/build /usr/share/nginx/html
+COPY ./build /usr/share/nginx/html
 
 # เปิดพอร์ตที่ Nginx ฟัง
 EXPOSE 80
