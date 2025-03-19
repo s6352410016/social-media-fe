@@ -88,18 +88,22 @@ const CreatePost = ({ userData, activeUserId, userInfo, createPostStatus, setCre
       fileImgsToSelect.map((file) => {
         formData.append('postImage', file);
       });
-      fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/createPostWithImages`, {
+      fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/post/createPostWithImages`, {
         method: 'POST',
+        headers: {
+          "Authorization": `Bearer ${localStorage.getItem('token')}`
+        },
         body: formData
       }).then((res) => {
         if (res.status === 201) {
           return res.json();
         }
       }).then(async (res) => {
-        const response = await fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/createNotification`, {
+        const response = await fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/noti/createNotification`, {
           method: 'POST',
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
           },
           body: JSON.stringify({
             notificationOfUserId: activeUserId,
@@ -126,18 +130,22 @@ const CreatePost = ({ userData, activeUserId, userInfo, createPostStatus, setCre
       formData.append('userIdToPost', activeUserId);
       formData.append('postMsg', postMsg);
       formData.append('postVideo', videoFile);
-      fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/createPostWithVideo`, {
+      fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/post/createPostWithVideo`, {
         method: 'POST',
+        headers: {
+          "Authorization": `Bearer ${localStorage.getItem('token')}`
+        },
         body: formData
       }).then((res) => {
         if (res.status === 201) {
           return res.json();
         }
       }).then(async (res) => {
-        const response = await fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/createNotification`, {
+        const response = await fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/noti/createNotification`, {
           method: 'POST',
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
           },
           body: JSON.stringify({
             notificationOfUserId: activeUserId,
@@ -159,10 +167,11 @@ const CreatePost = ({ userData, activeUserId, userInfo, createPostStatus, setCre
       return;
     }
     if (!!postMsg && fileImgsToSelect.length === 0 && !videoFile) {
-      fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/createPostWithMsg`, {
+      fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/post/createPostWithMsg`, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
         },
         body: JSON.stringify({
           userIdToPost: activeUserId,
@@ -173,10 +182,11 @@ const CreatePost = ({ userData, activeUserId, userInfo, createPostStatus, setCre
           return res.json();
         }
       }).then(async (res) => {
-        const response = await fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/createNotification`, {
+        const response = await fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/noti/createNotification`, {
           method: 'POST',
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
           },
           body: JSON.stringify({
             notificationOfUserId: activeUserId,

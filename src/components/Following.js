@@ -11,10 +11,11 @@ const Following = ({ setOpenFollowingPopup, showProfilePageStatus, setShowProfil
 
     const delayChangeIconFollower = () => {
         setLoadingEffectFollow(true);
-        fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/followAndUnFollow`, {
+        fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/user/followAndUnFollow`, {
             method: 'PUT',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
             },
             body: JSON.stringify({
                 activeUserId: dataUserInActive._id,

@@ -14,10 +14,11 @@ const ChatUserList = ({ setShowIconFetchMsg, setShowChatBody, setShowChatHeader,
     const lastname = dataChatOfUserByuserId.lastname
     const fullName = `${firstname}`;
     setFullnameUserChat(fullName);
-    fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/getMessage`, {
+    fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/chat/getMessage`, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
       },
       body: JSON.stringify({
         chatId: chatId
@@ -47,10 +48,11 @@ const ChatUserList = ({ setShowIconFetchMsg, setShowChatBody, setShowChatHeader,
   }, []);
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/getLastMessageByChatId`, {
+    fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/chat/getLastMessageByChatId`, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
       },
       body: JSON.stringify({
         chatId: chatId
@@ -80,10 +82,11 @@ const ChatUserList = ({ setShowIconFetchMsg, setShowChatBody, setShowChatHeader,
 
   useEffect(() => {
     socket.current?.on('createChatMsg', () => {
-      fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/getLastMessageByChatId`, {
+      fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/chat/getLastMessageByChatId`, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
         },
         body: JSON.stringify({
           chatId: chatId

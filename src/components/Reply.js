@@ -129,10 +129,11 @@ const Reply = ({ replyId, commentIdToReply, userIdToReply, replyMsgs, replyImg, 
 
     const likeReply = async () => {
         try {
-            await fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/likeAndDislikeReply`, {
+            await fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/reply/likeAndDislikeReply`, {
                 method: "PUT",
                 headers: {
-                    "Content-Type": "application/json"
+                    "Content-Type": "application/json",
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`
                 },
                 body: JSON.stringify({
                     replyId: replyId,
@@ -155,10 +156,11 @@ const Reply = ({ replyId, commentIdToReply, userIdToReply, replyMsgs, replyImg, 
 
             if (editReplyMsg.trim() !== "" || selectFileImgInEditReply !== null || replyImg) {
                 if (editReplyMsg.trim() !== "" && selectFileImgInEditReply === null) {
-                    await fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/updateReplyWithMsg`, {
+                    await fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/reply/updateReplyWithMsg`, {
                         method: "PUT",
                         headers: {
-                            "Content-Type": "application/json"
+                            "Content-Type": "application/json",
+                            'Authorization': `Bearer ${localStorage.getItem('token')}`
                         },
                         body: JSON.stringify({
                             replyId: replyId,
@@ -189,8 +191,11 @@ const Reply = ({ replyId, commentIdToReply, userIdToReply, replyMsgs, replyImg, 
                 if (editReplyMsg.trim() === "" && selectFileImgInEditReply !== null) {
                     formData.append("replyId", replyId);
                     formData.append("replyImg", selectFileImgInEditReply);
-                    await fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/updateReplyWithImage`, {
+                    await fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/reply/updateReplyWithImage`, {
                         method: "PUT",
+                        headers: {
+                            'Authorization': `Bearer ${localStorage.getItem('token')}`
+                        },
                         body: formData
                     });
                     setReplyData((prev) => {
@@ -212,10 +217,11 @@ const Reply = ({ replyId, commentIdToReply, userIdToReply, replyMsgs, replyImg, 
                 }
 
                 if (editReplyMsg.trim() === "" && openImgPreviewInEditReply) {
-                    await fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/deleteReplyMsg`, {
+                    await fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/reply/deleteReplyMsg`, {
                         method: "DELETE",
                         headers: {
-                            "Content-Type": "application/json"
+                            "Content-Type": "application/json",
+                            'Authorization': `Bearer ${localStorage.getItem('token')}`
                         },
                         body: JSON.stringify({
                             replyId: replyId,
@@ -236,8 +242,11 @@ const Reply = ({ replyId, commentIdToReply, userIdToReply, replyMsgs, replyImg, 
                     formData.append("replyId", replyId);
                     formData.append("replyMsg", editReplyMsg.trim());
                     formData.append("replyImg", selectFileImgInEditReply);
-                    await fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/updateReplyWithImageAndMsg`, {
+                    await fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/reply/updateReplyWithImageAndMsg`, {
                         method: "PUT",
+                        headers: {
+                            'Authorization': `Bearer ${localStorage.getItem('token')}`
+                        },
                         body: formData
                     });
                     setReplyData((prev) => {
@@ -267,10 +276,11 @@ const Reply = ({ replyId, commentIdToReply, userIdToReply, replyMsgs, replyImg, 
     const deleteReply = async () => {
         try {
             setEffectWhileDeleteReply(true);
-            await fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/deleteReply`, {
+            await fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/reply/deleteReply`, {
                 method: "DELETE",
                 headers: {
-                    "Content-Type": "application/json"
+                    "Content-Type": "application/json",
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`
                 },
                 body: JSON.stringify({
                     replyId: replyId
@@ -291,10 +301,11 @@ const Reply = ({ replyId, commentIdToReply, userIdToReply, replyMsgs, replyImg, 
             const formData = new FormData();
 
             if (replyMsg.trim() !== "" && selectFileImgToReply === null) {
-                const res = await fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/createReply`, {
+                const res = await fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/reply/createReply`, {
                     method: "POST",
                     headers: {
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${localStorage.getItem('token')}`
                     },
                     body: JSON.stringify({
                         postIdToReply: postId,
@@ -308,10 +319,11 @@ const Reply = ({ replyId, commentIdToReply, userIdToReply, replyMsgs, replyImg, 
                 setOpenReply(false);
                 const data = await res.json();
                 if (userIdToReply !== activeUserId) {
-                    const response = await fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/createNotification`, {
+                    const response = await fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/noti/createNotification`, {
                         method: 'POST',
                         headers: {
-                            'Content-Type': 'application/json'
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${localStorage.getItem('token')}`
                         },
                         body: JSON.stringify({
                             notificationOfUserId: activeUserId,
@@ -335,8 +347,11 @@ const Reply = ({ replyId, commentIdToReply, userIdToReply, replyMsgs, replyImg, 
                 formData.append("userIdToReply", activeUserId);
                 formData.append("replyImg", selectFileImgToReply);
                 formData.append("tagUserId", userIdToReply);
-                const res = await fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/createReply`, {
+                const res = await fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/reply/createReply`, {
                     method: "POST",
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.getItem('token')}`
+                    },
                     body: formData
                 });
                 setPreviewImgFile("");
@@ -345,10 +360,11 @@ const Reply = ({ replyId, commentIdToReply, userIdToReply, replyMsgs, replyImg, 
                 setOpenReply(false);
                 const data = await res.json();
                 if (userIdToReply !== activeUserId) {
-                    const response = await fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/createNotification`, {
+                    const response = await fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/noti/createNotification`, {
                         method: 'POST',
                         headers: {
-                            'Content-Type': 'application/json'
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${localStorage.getItem('token')}`
                         },
                         body: JSON.stringify({
                             notificationOfUserId: activeUserId,
@@ -373,8 +389,11 @@ const Reply = ({ replyId, commentIdToReply, userIdToReply, replyMsgs, replyImg, 
                 formData.append("replyMsg", replyMsg);
                 formData.append("replyImg", selectFileImgToReply);
                 formData.append("tagUserId", userIdToReply);
-                const res = await fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/createReply`, {
+                const res = await fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/reply/createReply`, {
                     method: "POST",
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.getItem('token')}`
+                    },
                     body: formData
                 });
                 setReplyMsg("");
@@ -384,10 +403,11 @@ const Reply = ({ replyId, commentIdToReply, userIdToReply, replyMsgs, replyImg, 
                 setOpenReply(false);
                 const data = await res.json();
                 if (userIdToReply !== activeUserId) {
-                    const response = await fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/createNotification`, {
+                    const response = await fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/noti/createNotification`, {
                         method: 'POST',
                         headers: {
-                            'Content-Type': 'application/json'
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${localStorage.getItem('token')}`
                         },
                         body: JSON.stringify({
                             notificationOfUserId: activeUserId,

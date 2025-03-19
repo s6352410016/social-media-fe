@@ -101,10 +101,11 @@ const Comment = ({ setCommentOfUsers, postId, followAndUnFollow, setFollowAndUnF
 
         if (!!editCommentMsg.trim() || !!selectFileImgInEditComment || !!commentImg) {
             if (!!editCommentMsg.trim() && !selectFileImgInEditComment) {
-                fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/updateCommentWithMsgs`, {
+                fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/comment/updateCommentWithMsgs`, {
                     method: 'PUT',
                     headers: {
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json',
+                        "Authorization": `Bearer ${localStorage.getItem('token')}`
                     },
                     body: JSON.stringify({
                         commentId: commentId,
@@ -139,8 +140,11 @@ const Comment = ({ setCommentOfUsers, postId, followAndUnFollow, setFollowAndUnF
                 formData.append('commentId', commentId);
                 formData.append('commentMsgs', editCommentMsg.trim());
                 formData.append('commentImage', selectFileImgInEditComment);
-                fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/updateCommentWithImage`, {
+                fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/comment/updateCommentWithImage`, {
                     method: 'PUT',
+                    headers: {
+                        "Authorization": `Bearer ${localStorage.getItem('token')}`
+                    },
                     body: formData
                 }).then((res) => {
                     if (res.status === 200) {
@@ -168,8 +172,11 @@ const Comment = ({ setCommentOfUsers, postId, followAndUnFollow, setFollowAndUnF
                 formData.append('commentId', commentId);
                 formData.append('commentMsgs', editCommentMsg.trim());
                 formData.append('commentImage', selectFileImgInEditComment);
-                fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/updateCommentWithImage`, {
+                fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/comment/updateCommentWithImage`, {
                     method: 'PUT',
+                    headers: {
+                        "Authorization": `Bearer ${localStorage.getItem('token')}`
+                    },
                     body: formData
                 }).then((res) => {
                     if (res.status === 200) {
@@ -196,8 +203,11 @@ const Comment = ({ setCommentOfUsers, postId, followAndUnFollow, setFollowAndUnF
             if (!!editCommentMsg.trim() && !selectFileImgInEditComment && deleteImgInEditComment) {
                 formData.append('commentId', commentId);
                 formData.append('commentMsgs', editCommentMsg.trim());
-                fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/updateCommentWithImage`, {
+                fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/comment/updateCommentWithImage`, {
                     method: 'PUT',
+                    headers: {
+                        "Authorization": `Bearer ${localStorage.getItem('token')}`
+                    },
                     body: formData
                 }).then((res) => {
                     if (res.status === 200) {
@@ -214,10 +224,11 @@ const Comment = ({ setCommentOfUsers, postId, followAndUnFollow, setFollowAndUnF
                 return;
             }
             if (!editCommentMsg.trim() && !selectFileImgInEditComment && deleteImgInEditComment === false && !!commentImg) {
-                fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/deleteCommentMsg`, {
+                fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/comment/deleteCommentMsg`, {
                     method: 'DELETE',
                     headers: {
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json',
+                        "Authorization": `Bearer ${localStorage.getItem('token')}`
                     },
                     body: JSON.stringify({
                         commentId: commentId,
@@ -241,10 +252,11 @@ const Comment = ({ setCommentOfUsers, postId, followAndUnFollow, setFollowAndUnF
 
     const deleteComment = () => {
         setEffectWhileDeleteComment(true);
-        fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/deleteComment`, {
+        fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/comment/deleteComment`, {
             method: 'DELETE',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                "Authorization": `Bearer ${localStorage.getItem('token')}`
             },
             body: JSON.stringify({
                 commentId: commentId
@@ -295,10 +307,11 @@ const Comment = ({ setCommentOfUsers, postId, followAndUnFollow, setFollowAndUnF
 
     const likeComment = async () => {
         try {
-            await fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/likeAndDislikeComment`, {
+            await fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/comment/likeAndDislikeComment`, {
                 method: "PUT",
                 headers: {
-                    "Content-Type": "application/json"
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${localStorage.getItem('token')}`
                 },
                 body: JSON.stringify({
                     commentId: commentId,
@@ -320,10 +333,11 @@ const Comment = ({ setCommentOfUsers, postId, followAndUnFollow, setFollowAndUnF
             const formData = new FormData();
 
             if (replyMsg.trim() !== "" && selectFileImgToReply === null) {
-                const res = await fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/createReply`, {
+                const res = await fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/reply/createReply`, {
                     method: "POST",
                     headers: {
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${localStorage.getItem('token')}`
                     },
                     body: JSON.stringify({
                         postIdToReply: postId,
@@ -337,10 +351,11 @@ const Comment = ({ setCommentOfUsers, postId, followAndUnFollow, setFollowAndUnF
                 setOpenReplyData(true);
                 const data = await res.json();
                 if (userIdToComment !== activeUserId) {
-                    const response = await fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/createNotification`, {
+                    const response = await fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/noti/createNotification`, {
                         method: 'POST',
                         headers: {
-                            'Content-Type': 'application/json'
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${localStorage.getItem('token')}`
                         },
                         body: JSON.stringify({
                             notificationOfUserId: activeUserId,
@@ -363,8 +378,11 @@ const Comment = ({ setCommentOfUsers, postId, followAndUnFollow, setFollowAndUnF
                 formData.append("commentIdToReply", commentId);
                 formData.append("userIdToReply", activeUserId);
                 formData.append("replyImg", selectFileImgToReply);
-                const res = await fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/createReply`, {
+                const res = await fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/reply/createReply`, {
                     method: "POST",
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.getItem('token')}`
+                    },
                     body: formData
                 });
                 setPreviewImgFile("");
@@ -374,10 +392,11 @@ const Comment = ({ setCommentOfUsers, postId, followAndUnFollow, setFollowAndUnF
                 setOpenReplyData(true);
                 const data = await res.json();
                 if (userIdToComment !== activeUserId) {
-                    const response = await fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/createNotification`, {
+                    const response = await fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/noti/createNotification`, {
                         method: 'POST',
                         headers: {
-                            'Content-Type': 'application/json'
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${localStorage.getItem('token')}`
                         },
                         body: JSON.stringify({
                             notificationOfUserId: activeUserId,
@@ -401,8 +420,11 @@ const Comment = ({ setCommentOfUsers, postId, followAndUnFollow, setFollowAndUnF
                 formData.append("userIdToReply", activeUserId);
                 formData.append("replyMsg", replyMsg);
                 formData.append("replyImg", selectFileImgToReply);
-                const res = await fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/createReply`, {
+                const res = await fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/reply/createReply`, {
                     method: "POST",
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.getItem('token')}`
+                    },
                     body: formData
                 });
                 setReplyMsg("");
@@ -413,10 +435,11 @@ const Comment = ({ setCommentOfUsers, postId, followAndUnFollow, setFollowAndUnF
                 setOpenReplyData(true);
                 const data = await res.json();
                 if (userIdToComment !== activeUserId) {
-                    const response = await fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/createNotification`, {
+                    const response = await fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/noti/createNotification`, {
                         method: 'POST',
                         headers: {
-                            'Content-Type': 'application/json'
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${localStorage.getItem('token')}`
                         },
                         body: JSON.stringify({
                             notificationOfUserId: activeUserId,
@@ -440,10 +463,11 @@ const Comment = ({ setCommentOfUsers, postId, followAndUnFollow, setFollowAndUnF
 
     const getReplyByCommentId = async () => {
         try {
-            const res = await fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/getReplyByCommentId`, {
+            const res = await fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/reply/getReplyByCommentId`, {
                 method: "POST",
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`
                 },
                 body: JSON.stringify({
                     commentId: commentId

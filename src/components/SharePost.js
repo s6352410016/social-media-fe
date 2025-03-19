@@ -63,10 +63,11 @@ const SharePost = ({ setOpenProfileStatus, showProfilePageStatus, setShowProfile
 
     const saveEditPost = () => {
         setEffectWhileEditPost(true);
-        fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/updateSharePost`, {
+        fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/sharePost/updateSharePost`, {
             method: 'PUT',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
             },
             body: JSON.stringify({
                 shareId: shareId,
@@ -84,10 +85,11 @@ const SharePost = ({ setOpenProfileStatus, showProfilePageStatus, setShowProfile
 
     const deletePost = () => {
         setEffectWhileDeletePost(true);
-        fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/deleteSharePost`, {
+        fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/sharePost/deleteSharePost`, {
             method: 'DELETE',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
             },
             body: JSON.stringify({
                 shareId: shareId,
@@ -104,10 +106,11 @@ const SharePost = ({ setOpenProfileStatus, showProfilePageStatus, setShowProfile
     }
 
     const likePost = () => {
-        fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/sharePostLikeAndDislike`, {
+        fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/sharePost/sharePostLikeAndDislike`, {
             method: 'PUT',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
             },
             body: JSON.stringify({
                 shareId: shareId,
@@ -129,8 +132,11 @@ const SharePost = ({ setOpenProfileStatus, showProfilePageStatus, setShowProfile
             formData.append('postIdToComment', shareId);
             formData.append('userIdToComment', activeUserId);
             formData.append('commentMsgs', commetMsg);
-            fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/createComment`, {
+            fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/comment/createComment`, {
                 method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`
+                },
                 body: formData
             }).then((res) => {
                 if (res.status === 201) {
@@ -144,10 +150,11 @@ const SharePost = ({ setOpenProfileStatus, showProfilePageStatus, setShowProfile
                 }
             }).then(async (res) => {
                 if (userIdToShare !== activeUserId) {
-                    const response = await fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/createNotification`, {
+                    const response = await fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/noti/createNotification`, {
                         method: 'POST',
                         headers: {
-                            'Content-Type': 'application/json'
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${localStorage.getItem('token')}`
                         },
                         body: JSON.stringify({
                             notificationOfUserId: activeUserId,
@@ -169,8 +176,11 @@ const SharePost = ({ setOpenProfileStatus, showProfilePageStatus, setShowProfile
             formData.append('userIdToComment', activeUserId);
             formData.append('commentMsgs', commetMsg);
             formData.append('commentImage', selectFileImgToComment);
-            fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/createComment`, {
+            fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/comment/createComment`, {
                 method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`
+                },
                 body: formData
             }).then((res) => {
                 if (res.status === 201) {
@@ -184,10 +194,11 @@ const SharePost = ({ setOpenProfileStatus, showProfilePageStatus, setShowProfile
                 }
             }).then(async (res) => {
                 if (userIdToShare !== activeUserId) {
-                    const response = await fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/createNotification`, {
+                    const response = await fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/noti/createNotification`, {
                         method: 'POST',
                         headers: {
-                            'Content-Type': 'application/json'
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${localStorage.getItem('token')}`
                         },
                         body: JSON.stringify({
                             notificationOfUserId: activeUserId,
@@ -209,8 +220,11 @@ const SharePost = ({ setOpenProfileStatus, showProfilePageStatus, setShowProfile
             formData.append('userIdToComment', activeUserId);
             formData.append('commentMsgs', commetMsg);
             formData.append('commentImage', selectFileImgToComment);
-            fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/createComment`, {
+            fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/comment/createComment`, {
                 method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`
+                },
                 body: formData
             }).then((res) => {
                 if (res.status === 201) {
@@ -224,10 +238,11 @@ const SharePost = ({ setOpenProfileStatus, showProfilePageStatus, setShowProfile
                 }
             }).then(async (res) => {
                 if (userIdToShare !== activeUserId) {
-                    const response = await fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/createNotification`, {
+                    const response = await fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/noti/createNotification`, {
                         method: 'POST',
                         headers: {
-                            'Content-Type': 'application/json'
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${localStorage.getItem('token')}`
                         },
                         body: JSON.stringify({
                             notificationOfUserId: activeUserId,
@@ -249,10 +264,11 @@ const SharePost = ({ setOpenProfileStatus, showProfilePageStatus, setShowProfile
     const sharePost = async () => {
         try {
             setEffectWhileSharePost(true);
-            const res = await fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/createSharePost`, {
+            const res = await fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/sharePost/createSharePost`, {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`
                 },
                 body: JSON.stringify({
                     postIdToShare: postIdToShare,
@@ -266,10 +282,11 @@ const SharePost = ({ setOpenProfileStatus, showProfilePageStatus, setShowProfile
                 setCreateSharePostStatus(!createSharePostStatus);
                 setOpenSharePostPopup(false);
                 if (dataPostOfUserBySharePostId.userIdToPost !== activeUserId) {
-                    const response = await fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/createNotification`, {
+                    const response = await fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/noti/createNotification`, {
                         method: 'POST',
                         headers: {
-                            'Content-Type': 'application/json'
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${localStorage.getItem('token')}`
                         },
                         body: JSON.stringify({
                             notificationOfUserId: activeUserId,
@@ -376,10 +393,11 @@ const SharePost = ({ setOpenProfileStatus, showProfilePageStatus, setShowProfile
 
     useEffect(() => {
         socket.current?.on('notificationServerEmit', () => {
-            fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/getCommentByPostId`, {
+            fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/comment/getCommentByPostId`, {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`
                 },
                 body: JSON.stringify({
                     postId: shareId,
@@ -397,10 +415,11 @@ const SharePost = ({ setOpenProfileStatus, showProfilePageStatus, setShowProfile
 
     useEffect(() => {
         socket.current?.on('commentTransactionServerEmit', () => {
-            fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/getCommentByPostId`, {
+            fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/comment/getCommentByPostId`, {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`
                 },
                 body: JSON.stringify({
                     postId: shareId,
@@ -417,10 +436,11 @@ const SharePost = ({ setOpenProfileStatus, showProfilePageStatus, setShowProfile
     }, []);
 
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/getCommentByPostId`, {
+        fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/comment/getCommentByPostId`, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
             },
             body: JSON.stringify({
                 postId: shareId,

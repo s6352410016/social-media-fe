@@ -6,10 +6,11 @@ const SearchPeopleChat = ({closePopupRef ,setOpenSearchPeopleChat , setShowChatB
   const { socket } = useContext(SocketIOContext);
 
   const createChat = () => {
-    fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/createChat`, {
+    fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/chat/createChat`, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
       },
       body: JSON.stringify({
         senderId: userDataInActive._id,

@@ -74,10 +74,11 @@ const Post = ({ setSortAllPostAscending, setOpenProfileStatus, showProfilePageSt
         const formData = new FormData();
 
         if (msgInEditPost.trim() !== "" && selectFileImgToEditPost.length === 0 && fileVideoInEditPost === null) {
-            fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/updatePostWithMsg`, {
+            fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/post/updatePostWithMsg`, {
                 method: 'PUT',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`
                 },
                 body: JSON.stringify({
                     postId: postId,
@@ -124,8 +125,11 @@ const Post = ({ setSortAllPostAscending, setOpenProfileStatus, showProfilePageSt
             selectFileImgToEditPost?.map((file) => {
                 formData.append('postImage', file);
             });
-            fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/updatePostWithImages`, {
+            fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/post/updatePostWithImages`, {
                 method: 'PUT',
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`
+                },
                 body: formData
             }).then((res) => {
                 if (res.status === 200) {
@@ -155,8 +159,11 @@ const Post = ({ setSortAllPostAscending, setOpenProfileStatus, showProfilePageSt
             selectFileImgToEditPost?.map((file) => {
                 formData.append('postImage', file);
             });
-            fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/updatePostWithImages`, {
+            fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/post/updatePostWithImages`, {
                 method: 'PUT',
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`
+                },
                 body: formData
             }).then((res) => {
                 if (res.status === 200) {
@@ -185,8 +192,11 @@ const Post = ({ setSortAllPostAscending, setOpenProfileStatus, showProfilePageSt
             formData.append('postId', postId);
             formData.append('postMsg', msgInEditPost.trim());
             formData.append('postVideo', fileVideoInEditPost);
-            fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/updatePostWithVideo`, {
+            fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/post/updatePostWithVideo`, {
                 method: 'PUT',
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`
+                },
                 body: formData
             }).then((res) => {
                 if (res.status === 200) {
@@ -214,8 +224,11 @@ const Post = ({ setSortAllPostAscending, setOpenProfileStatus, showProfilePageSt
             formData.append('postId', postId);
             formData.append('postMsg', msgInEditPost.trim());
             formData.append('postVideo', fileVideoInEditPost);
-            fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/updatePostWithVideo`, {
+            fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/post/updatePostWithVideo`, {
                 method: 'PUT',
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`
+                },
                 body: formData
             }).then((res) => {
                 if (res.status === 200) {
@@ -243,10 +256,11 @@ const Post = ({ setSortAllPostAscending, setOpenProfileStatus, showProfilePageSt
 
     const deletePost = () => {
         setEffectWhileDeletePost(true);
-        fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/deletePost`, {
+        fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/post/deletePost`, {
             method: 'DELETE',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
             },
             body: JSON.stringify({
                 postId: postId
@@ -262,10 +276,11 @@ const Post = ({ setSortAllPostAscending, setOpenProfileStatus, showProfilePageSt
     }
 
     const likePost = () => {
-        fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/likeAndDislikePost`, {
+        fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/post/likeAndDislikePost`, {
             method: 'PUT',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
             },
             body: JSON.stringify({
                 postId: postId,
@@ -287,8 +302,11 @@ const Post = ({ setSortAllPostAscending, setOpenProfileStatus, showProfilePageSt
             formData.append('postIdToComment', postId);
             formData.append('userIdToComment', activeUserId);
             formData.append('commentMsgs', commetMsg);
-            fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/createComment`, {
+            fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/comment/createComment`, {
                 method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`
+                },
                 body: formData
             }).then((res) => {
                 if (res.status === 201) {
@@ -302,10 +320,11 @@ const Post = ({ setSortAllPostAscending, setOpenProfileStatus, showProfilePageSt
                 }
             }).then(async (res) => {
                 if (userIdToPost !== activeUserId) {
-                    const response = await fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/createNotification`, {
+                    const response = await fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/noti/createNotification`, {
                         method: 'POST',
                         headers: {
-                            'Content-Type': 'application/json'
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${localStorage.getItem('token')}`
                         },
                         body: JSON.stringify({
                             notificationOfUserId: activeUserId,
@@ -327,8 +346,11 @@ const Post = ({ setSortAllPostAscending, setOpenProfileStatus, showProfilePageSt
             formData.append('userIdToComment', activeUserId);
             formData.append('commentMsgs', commetMsg);
             formData.append('commentImage', selectFileImgToComment);
-            fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/createComment`, {
+            fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/comment/createComment`, {
                 method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`
+                },
                 body: formData
             }).then((res) => {
                 if (res.status === 201) {
@@ -342,10 +364,11 @@ const Post = ({ setSortAllPostAscending, setOpenProfileStatus, showProfilePageSt
                 }
             }).then(async (res) => {
                 if (userIdToPost !== activeUserId) {
-                    const response = await fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/createNotification`, {
+                    const response = await fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/noti/createNotification`, {
                         method: 'POST',
                         headers: {
-                            'Content-Type': 'application/json'
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${localStorage.getItem('token')}`
                         },
                         body: JSON.stringify({
                             notificationOfUserId: activeUserId,
@@ -367,8 +390,11 @@ const Post = ({ setSortAllPostAscending, setOpenProfileStatus, showProfilePageSt
             formData.append('userIdToComment', activeUserId);
             formData.append('commentMsgs', commetMsg);
             formData.append('commentImage', selectFileImgToComment);
-            fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/createComment`, {
+            fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/comment/createComment`, {
                 method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`
+                },
                 body: formData
             }).then((res) => {
                 if (res.status === 201) {
@@ -382,10 +408,11 @@ const Post = ({ setSortAllPostAscending, setOpenProfileStatus, showProfilePageSt
                 }
             }).then(async (res) => {
                 if (userIdToPost !== activeUserId) {
-                    const response = await fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/createNotification`, {
+                    const response = await fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/noti/createNotification`, {
                         method: 'POST',
                         headers: {
-                            'Content-Type': 'application/json'
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${localStorage.getItem('token')}`
                         },
                         body: JSON.stringify({
                             notificationOfUserId: activeUserId,
@@ -407,10 +434,11 @@ const Post = ({ setSortAllPostAscending, setOpenProfileStatus, showProfilePageSt
     const sharePost = async () => {
         try {
             setEffectWhileSharePost(true);
-            const res = await fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/createSharePost`, {
+            const res = await fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/sharePost/createSharePost`, {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`
                 },
                 body: JSON.stringify({
                     postIdToShare: postId,
@@ -424,10 +452,11 @@ const Post = ({ setSortAllPostAscending, setOpenProfileStatus, showProfilePageSt
                 setCreateSharePostStatus(!createSharePostStatus);
                 setOpenSharePostPopup(false);
                 if (userIdToPost !== activeUserId) {
-                    const response = await fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/createNotification`, {
+                    const response = await fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/noti/createNotification`, {
                         method: 'POST',
                         headers: {
-                            'Content-Type': 'application/json'
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${localStorage.getItem('token')}`
                         },
                         body: JSON.stringify({
                             notificationOfUserId: activeUserId,
@@ -582,10 +611,11 @@ const Post = ({ setSortAllPostAscending, setOpenProfileStatus, showProfilePageSt
 
     useEffect(() => {
         socket.current?.on('notificationServerEmit', () => {
-            fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/getCommentByPostId`, {
+            fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/comment/getCommentByPostId`, {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`
                 },
                 body: JSON.stringify({
                     postId: postId,
@@ -603,10 +633,11 @@ const Post = ({ setSortAllPostAscending, setOpenProfileStatus, showProfilePageSt
 
     useEffect(() => {
         socket.current?.on('commentTransactionServerEmit', () => {
-            fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/getCommentByPostId`, {
+            fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/comment/getCommentByPostId`, {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`
                 },
                 body: JSON.stringify({
                     postId: postId,
@@ -623,10 +654,11 @@ const Post = ({ setSortAllPostAscending, setOpenProfileStatus, showProfilePageSt
     }, []);
 
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/getCommentByPostId`, {
+        fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/comment/getCommentByPostId`, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
             },
             body: JSON.stringify({
                 postId: postId,
@@ -829,7 +861,7 @@ const Post = ({ setSortAllPostAscending, setOpenProfileStatus, showProfilePageSt
                                                     <div className='container-img-in-container-img-swipper-in-container-body-in-container-edit-post-content-in-container-edit-post-in-icon-settings-post-of-users'>
                                                         <Swiper pagination={{ dynamicBullets: true, }} modules={[Pagination]} className="mySwiper">
                                                             {postImgs.map((e, index) => (
-                                                                <SwiperSlide key={index}><img src={`${process.env.REACT_APP_SERVER_DOMAIN}/postImg/${e}`} alt='postImg' /></SwiperSlide>
+                                                                <SwiperSlide key={index}><img src={`${process.env.REACT_APP_POST_IMG_S3}/${e}`} alt='postImg' /></SwiperSlide>
                                                             ))}
                                                         </Swiper>
                                                     </div>
@@ -848,7 +880,7 @@ const Post = ({ setSortAllPostAscending, setOpenProfileStatus, showProfilePageSt
                                                 <FontAwesomeIcon icon={faCircleXmark} className='icon-smark-in-container-icon-xmark-in-container-video-in-edit-post-in-container-body-in-container-edit-post-content-in-container-edit-post-in-icon-settings-post-of-users' />
                                             </div>
                                             <video controls>
-                                                <source src={`${process.env.REACT_APP_SERVER_DOMAIN}/postVideo/${postVideo}`}></source>
+                                                <source src={`${process.env.REACT_APP_POST_VIDEO_S3}/${postVideo}`}></source>
                                             </video>
                                         </div>
                                         :
@@ -913,7 +945,7 @@ const Post = ({ setSortAllPostAscending, setOpenProfileStatus, showProfilePageSt
                         <div className='container-img-post-of-users'>
                             <Swiper pagination={{ dynamicBullets: true, }} modules={[Pagination]} className="mySwiper">
                                 {postImgs.map((e, index) => (
-                                    <SwiperSlide key={index}><img src={`${process.env.REACT_APP_SERVER_DOMAIN}/postImg/${e}`} alt='postImg' /></SwiperSlide>
+                                    <SwiperSlide key={index}><img src={`${process.env.REACT_APP_POST_IMG_S3}/${e}`} alt='postImg' /></SwiperSlide>
                                 ))}
                             </Swiper>
                         </div>
@@ -927,7 +959,7 @@ const Post = ({ setSortAllPostAscending, setOpenProfileStatus, showProfilePageSt
                     <div style={{ marginTop: !postMsg ? '0' : '10px' }} className='container-post-video-in-container-post-of-users-fix'>
                         <div className='container-post-video-in-container-post-of-users'>
                             <video controls>
-                                <source src={`${process.env.REACT_APP_SERVER_DOMAIN}/postVideo/${postVideo}`}></source>
+                                <source src={`${process.env.REACT_APP_POST_VIDEO_S3}/${postVideo}`}></source>
                             </video>
                         </div>
                     </div>
@@ -1027,7 +1059,7 @@ const Post = ({ setSortAllPostAscending, setOpenProfileStatus, showProfilePageSt
                                                     <div className='container-img-post-of-users-in-content-center-in-post-of-users-in-container-post-of-user-to-share-in-body-share-content-post-in-container-share-content-post-in-container-icons-in-content-footer'>
                                                         <Swiper pagination={{ dynamicBullets: true, }} modules={[Pagination]} className="mySwiper">
                                                             {postImgs.map((e, index) => (
-                                                                <SwiperSlide key={index}><img src={`${process.env.REACT_APP_SERVER_DOMAIN}/postImg/${e}`} alt='postImg' className='border-radius-none-in-container-img-post-of-users-in-content-center-in-post-of-users-in-container-post-of-user-to-share-in-body-share-content-post-in-container-share-content-post-in-container-icons-in-content-footer' /></SwiperSlide>
+                                                                <SwiperSlide key={index}><img src={`${process.env.REACT_APP_POST_IMG_S3}/${e}`} alt='postImg' className='border-radius-none-in-container-img-post-of-users-in-content-center-in-post-of-users-in-container-post-of-user-to-share-in-body-share-content-post-in-container-share-content-post-in-container-icons-in-content-footer' /></SwiperSlide>
                                                             ))}
                                                         </Swiper>
                                                     </div>
@@ -1039,7 +1071,7 @@ const Post = ({ setSortAllPostAscending, setOpenProfileStatus, showProfilePageSt
                                                 ?
                                                 <div className='container-video-in-post-to-share-in-container-post-of-user-to-share-in-body-share-content-post-in-container-share-content-post-in-container-icons-in-content-footer'>
                                                     <video controls>
-                                                        <source src={`${process.env.REACT_APP_SERVER_DOMAIN}/postVideo/${postVideo}`}></source>
+                                                        <source src={`${process.env.REACT_APP_POST_VIDEO_S3}/${postVideo}`}></source>
                                                     </video>
                                                 </div>
                                                 :

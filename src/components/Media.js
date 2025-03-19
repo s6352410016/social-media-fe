@@ -74,10 +74,11 @@ const Media = ({ setLogoutStatus }) => {
 
   useEffect(() => {
     socket.current?.on('notificationServerEmit', () => {
-      fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/getAllNotifications`, {
+      fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/noti/getAllNotifications`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
         }
       }).then((res) => {
         if (res.status === 200) {
@@ -93,10 +94,11 @@ const Media = ({ setLogoutStatus }) => {
   }, []);
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/getAllNotifications`, {
+    fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/noti/getAllNotifications`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
       }
     }).then((res) => {
       if (res.status === 200) {
@@ -120,10 +122,11 @@ const Media = ({ setLogoutStatus }) => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'x-access-token': localStorage.getItem('token')
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
       }
     }).then((res) => {
       if (res.status === 401) {
+        localStorage.removeItem("token");
         window.location.href = '/';
       } else if (res.status === 403) {
         localStorage.removeItem("token");
@@ -142,10 +145,11 @@ const Media = ({ setLogoutStatus }) => {
 
   useEffect(() => {
     socket.current?.on('getAllUsers', () => {
-      fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/getAllUsers`, {
+      fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/user/getAllUsers`, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
         }
       }).then((res) => {
         if (res.status === 200) {
@@ -159,10 +163,11 @@ const Media = ({ setLogoutStatus }) => {
   }, [followAndUnFollow]);
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/getAllUsers`, {
+    fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/user/getAllUsers`, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
       }
     }).then((res) => {
       if (res.status === 200) {
@@ -204,10 +209,11 @@ const Media = ({ setLogoutStatus }) => {
 
   useEffect(() => {
     socket.current?.on('notificationServerEmit', () => {
-      fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/getAllPosts`, {
+      fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/post/getAllPosts`, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
         }
       }).then((res) => {
         if (res.status === 200) {
@@ -221,10 +227,11 @@ const Media = ({ setLogoutStatus }) => {
 
   useEffect(() => {
     socket.current?.on('postTransactionServerEmit', () => {
-      fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/getAllPosts`, {
+      fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/post/getAllPosts`, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
         }
       }).then((res) => {
         if (res.status === 200) {
@@ -237,10 +244,11 @@ const Media = ({ setLogoutStatus }) => {
   }, []);
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/getAllPosts`, {
+    fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/post/getAllPosts`, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
       }
     }).then((res) => {
       if (res.status === 200) {
@@ -253,10 +261,11 @@ const Media = ({ setLogoutStatus }) => {
 
   useEffect(() => {
     socket.current?.on('notificationServerEmit', () => {
-      fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/getAllSharePost`, {
+      fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/sharePost/getAllSharePost`, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
         }
       }).then((res) => {
         if (res.status === 200) {
@@ -270,10 +279,11 @@ const Media = ({ setLogoutStatus }) => {
 
   useEffect(() => {
     socket.current?.on('postTransactionServerEmit', () => {
-      fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/getAllSharePost`, {
+      fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/sharePost/getAllSharePost`, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
         }
       }).then((res) => {
         if (res.status === 200) {
@@ -286,10 +296,11 @@ const Media = ({ setLogoutStatus }) => {
   }, []);
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/getAllSharePost`, {
+    fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/sharePost/getAllSharePost`, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
       }
     }).then((res) => {
       if (res.status === 200) {
@@ -392,10 +403,11 @@ const Media = ({ setLogoutStatus }) => {
 
   const notificationPopup = () => {
     if (dataUserNotification.length > 0) {
-      fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/updateUserToReadNotification`, {
+      fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/noti/updateUserToReadNotification`, {
         method: 'PUT',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
         },
         body: JSON.stringify({
           userIdToRead: userDataInActive._id

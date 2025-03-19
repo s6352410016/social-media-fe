@@ -125,10 +125,11 @@ const Profile = ({ setLogoutStatus }) => {
 
   const notificationPopup = () => {
     if (dataUserNotification.length > 0) {
-      fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/updateUserToReadNotification`, {
+      fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/noti/updateUserToReadNotification`, {
         method: 'PUT',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
         },
         body: JSON.stringify({
           userIdToRead: userData.userId
@@ -261,8 +262,11 @@ const Profile = ({ setLogoutStatus }) => {
     setShowEffectWhileUploadProfileImg(true);
     const formData = new FormData();
     formData.append('profileImg', profileImg);
-    fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/uploadProfileImg/${userData.userId}`, {
+    fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/user/uploadProfileImg/${userData.userId}`, {
       method: 'PUT',
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      },
       body: formData
     }).then((res) => {
       if (res.status === 200) {
@@ -279,8 +283,11 @@ const Profile = ({ setLogoutStatus }) => {
     setShowEffectWhileUploadProfileBgImg(true);
     const formData = new FormData();
     formData.append('profileBgImg', profileBackgroundImg);
-    fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/uploadProfileBgImg/${userData.userId}`, {
+    fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/user/uploadProfileBgImg/${userData.userId}`, {
       method: 'PUT',
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      },
       body: formData
     }).then((res) => {
       if (res.status === 200) {
@@ -315,10 +322,11 @@ const Profile = ({ setLogoutStatus }) => {
   const deleteCurrentProfileImgFunc = async () => {
     try {
       setEffectWhileDeleteProfileImg(true);
-      const response = await fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/deleteCurrentProfileImg`, {
+      const response = await fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/user/deleteCurrentProfileImg`, {
         method: "DELETE",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
         },
         body: JSON.stringify({
           userId: userDataRef?.current,
@@ -338,10 +346,11 @@ const Profile = ({ setLogoutStatus }) => {
   const deleteCurrentProfileBgImgFunc = async () => {
     try {
       setEffectWhileDeleteProfileBgImg(true);
-      const response = await fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/deleteCurrentProfileBgImg`, {
+      const response = await fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/user/deleteCurrentProfileBgImg`, {
         method: "DELETE",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
         },
         body: JSON.stringify({
           userId: userDataRef?.current,
@@ -403,10 +412,11 @@ const Profile = ({ setLogoutStatus }) => {
 
   useEffect(() => {
     socket.current?.on('notificationServerEmit', () => {
-      fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/getAllNotifications`, {
+      fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/noti/getAllNotifications`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
         }
       }).then((res) => {
         if (res.status === 200) {
@@ -422,10 +432,11 @@ const Profile = ({ setLogoutStatus }) => {
   }, []);
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/getAllNotifications`, {
+    fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/noti/getAllNotifications`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
       }
     }).then((res) => {
       if (res.status === 200) {
@@ -449,7 +460,7 @@ const Profile = ({ setLogoutStatus }) => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'x-access-token': localStorage.getItem('token')
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
       }
     }).then((res) => {
       if (res.status === 401) {
@@ -471,10 +482,11 @@ const Profile = ({ setLogoutStatus }) => {
 
   useEffect(() => {
     socket.current?.on('getAllUsers', () => {
-      fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/getAllUsers`, {
+      fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/user/getAllUsers`, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
         }
       }).then((res) => {
         if (res.status === 200) {
@@ -487,10 +499,11 @@ const Profile = ({ setLogoutStatus }) => {
   }, [followAndUnFollow]);
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/getAllUsers`, {
+    fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/user/getAllUsers`, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
       }
     }).then((res) => {
       if (res.status === 200) {
@@ -503,10 +516,11 @@ const Profile = ({ setLogoutStatus }) => {
 
   useEffect(() => {
     socket.current?.on('notificationServerEmit', () => {
-      fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/getAllPosts`, {
+      fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/post/getAllPosts`, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
         }
       }).then((res) => {
         if (res.status === 200) {
@@ -520,10 +534,11 @@ const Profile = ({ setLogoutStatus }) => {
 
   useEffect(() => {
     socket.current?.on('postTransactionServerEmit', () => {
-      fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/getAllPosts`, {
+      fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/post/getAllPosts`, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
         }
       }).then((res) => {
         if (res.status === 200) {
@@ -536,10 +551,11 @@ const Profile = ({ setLogoutStatus }) => {
   }, []);
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/getAllPosts`, {
+    fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/post/getAllPosts`, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
       }
     }).then((res) => {
       if (res.status === 200) {
@@ -552,10 +568,11 @@ const Profile = ({ setLogoutStatus }) => {
 
   useEffect(() => {
     socket.current?.on('notificationServerEmit', () => {
-      fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/getAllSharePostByUserIdToShare/${id}`, {
+      fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/sharePost/getAllSharePostByUserIdToShare/${id}`, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
         }
       }).then((res) => {
         if (res.status === 200) {
@@ -568,10 +585,11 @@ const Profile = ({ setLogoutStatus }) => {
   }, []);
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/getAllSharePostByUserIdToShare/${id}`, {
+    fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/sharePost/getAllSharePostByUserIdToShare/${id}`, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
       }
     }).then((res) => {
       if (res.status === 200) {
@@ -683,10 +701,11 @@ const Profile = ({ setLogoutStatus }) => {
     }
 
     try{
-      const userExistRes = await fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/checkUserExistUpdateProfile` , {
+      const userExistRes = await fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/user/checkUserExistUpdateProfile` , {
         method: "POST",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
         },
         body: JSON.stringify({
           firstname,
@@ -704,10 +723,11 @@ const Profile = ({ setLogoutStatus }) => {
     }
 
     setShowEffectWhileUpdateProfile(true);
-    fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/updateOtherDetailOfUserByUserId/${userData.userId}`, {
+    fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/user/updateOtherDetailOfUserByUserId/${userData.userId}`, {
       method: 'PUT',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
       },
       body: JSON.stringify({
         firstname: firstname.trim(),
@@ -736,10 +756,11 @@ const Profile = ({ setLogoutStatus }) => {
   }
 
   const followUserInProfilePage = () => {
-    fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/followAndUnFollow`, {
+    fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/user/followAndUnFollow`, {
       method: 'PUT',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
       },
       body: JSON.stringify({
         activeUserId: userData?.userId,

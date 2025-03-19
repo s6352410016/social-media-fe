@@ -109,10 +109,11 @@ const Chat = ({ setLogoutStatus }) => {
 
   const notificationPopup = () => {
     if (dataUserNotification.length > 0) {
-      fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/updateUserToReadNotification`, {
+      fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/noti/updateUserToReadNotification`, {
         method: 'PUT',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
         },
         body: JSON.stringify({
           userIdToRead: userDataInActive._id
@@ -229,10 +230,11 @@ const Chat = ({ setLogoutStatus }) => {
     const formData = new FormData();
 
     if (!!createChatMsg && fileImg.length === 0) {
-      fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/createMessage`, {
+      fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/chat/createMessage`, {
         method: 'POST',
         headers: {
-          'content-type': 'application/json'
+          'content-type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
         },
         body: JSON.stringify({
           chatId: chatIdToCreateChatMsg,
@@ -263,8 +265,11 @@ const Chat = ({ setLogoutStatus }) => {
         formData.append('chatImg', file);
       });
 
-      fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/createMessage`, {
+      fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/chat/createMessage`, {
         method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        },
         body: formData
       }).then((res) => {
         if (res.status === 201) {
@@ -292,8 +297,11 @@ const Chat = ({ setLogoutStatus }) => {
         formData.append('chatImg', file);
       });
 
-      fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/createMessage`, {
+      fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/chat/createMessage`, {
         method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        },
         body: formData
       }).then((res) => {
         if (res.status === 201) {
@@ -325,10 +333,11 @@ const Chat = ({ setLogoutStatus }) => {
       setEffectWhileDeleteChat(true);
       const chat = chatOfUser.find((chat) => chat?._id === chatIdToCreateChatMsg);
       const receiverUserIdOfChatToDelete = chat?.members.find((member) => member !== userDataInActive?._id);
-      await fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/deleteMsgByChatId`, {
+      await fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/chat/deleteMsgByChatId`, {
         method: "DELETE",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
         },
         body: JSON.stringify({ chatId: chatIdToCreateChatMsg })
       });
@@ -369,10 +378,11 @@ const Chat = ({ setLogoutStatus }) => {
 
   useEffect(() => {
     socket.current?.on('getAllUsers', () => {
-      fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/getAllUsers`, {
+      fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/user/getAllUsers`, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
         }
       }).then((res) => {
         if (res.status === 200) {
@@ -385,10 +395,11 @@ const Chat = ({ setLogoutStatus }) => {
   }, [followAndUnFollow]);
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/getAllUsers`, {
+    fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/user/getAllUsers`, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
       }
     }).then((res) => {
       if (res.status === 200) {
@@ -404,7 +415,7 @@ const Chat = ({ setLogoutStatus }) => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'x-access-token': localStorage.getItem('token')
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
       }
     }).then((res) => {
       if (res.status === 401) {
@@ -434,10 +445,11 @@ const Chat = ({ setLogoutStatus }) => {
 
   useEffect(() => {
     socket.current?.on('notificationServerEmit', () => {
-      fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/getAllNotifications`, {
+      fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/noti/getAllNotifications`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
         }
       }).then((res) => {
         if (res.status === 200) {
@@ -453,10 +465,11 @@ const Chat = ({ setLogoutStatus }) => {
   }, []);
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/getAllNotifications`, {
+    fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/noti/getAllNotifications`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
       }
     }).then((res) => {
       if (res.status === 200) {
@@ -491,10 +504,11 @@ const Chat = ({ setLogoutStatus }) => {
       setChatIdToCreateChatMsg("");
       setChatMsg([]);
       if (userDataInActive !== undefined && Object.keys(userDataInActive).length !== 0) {
-        fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/getAllChatByUserId/${userDataInActive._id}`, {
+        fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/chat/getAllChatByUserId/${userDataInActive._id}`, {
           method: 'POST',
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
           }
         }).then((res) => {
           if (res.status === 200) {
@@ -511,10 +525,11 @@ const Chat = ({ setLogoutStatus }) => {
 
   useEffect(() => {
     if (userDataInActive !== undefined && Object.keys(userDataInActive).length !== 0) {
-      fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/getAllChatByUserId/${userDataInActive._id}`, {
+      fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/chat/getAllChatByUserId/${userDataInActive._id}`, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
         }
       }).then((res) => {
         if (res.status === 200) {
