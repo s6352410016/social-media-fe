@@ -4,17 +4,14 @@ services:
     build: .
     container_name: react
     ports:
-      - "3000:80"  # Nginx จะฟังที่พอร์ต 80 แต่การเข้าถึงจะผ่านพอร์ต 3000
-    restart: always
-    env_file:
-      - .env
-
+      - "3000:80"
+    restart: on-failure
   nginx:
     image: nginx:alpine
     container_name: nginx
     ports:
-      - "80:80"  # เปิดพอร์ต 80
+      - "80:80"
     volumes:
-      - ./default.conf:/etc/nginx/conf.d/default.conf  # การตั้งค่า Nginx
-      - ./build:/usr/share/nginx/html  # คัดลอกไฟล์ build ของ React ไปยัง Nginx
-    restart: always
+      - ./default.conf:/etc/nginx/conf.d/default.conf  
+      - ./build:/usr/share/nginx/html
+    restart: on-failure

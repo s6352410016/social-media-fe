@@ -45,7 +45,7 @@ const PeopleLikedYourPost = ({ showProfilePageStatus, setShowProfilePageStatus, 
     return (
         <div className='container-profile-card-in-people-likes-post-list'>
             <Link onClick={() => setShowProfilePageStatus(!showProfilePageStatus)} to={`/profile/${UserIdToLikeInPost}`} className='container-img-in-center-in-people-likes-post-list'>
-                <img src={`${process.env.REACT_APP_SERVER_DOMAIN}/userProfileImg/${!dataOfUserToLikeInPostByUserId.profilePicture ? 'profileImgDefault.jpg' : dataOfUserToLikeInPostByUserId.profilePicture}`} alt='imgProfile' />
+                <img src={`${process.env.REACT_APP_PROFILE_IMG_S3}/${!dataOfUserToLikeInPostByUserId.profilePicture ? 'profileImgDefault.jpg' : dataOfUserToLikeInPostByUserId.profilePicture}`} alt='imgProfile' />
             </Link>
             <Link onClick={() => setShowProfilePageStatus(!showProfilePageStatus)} to={`/profile/${UserIdToLikeInPost}`} className='container-fullname-in-center-in-people-likes-post-list'>
                 <b>{dataOfUserToLikeInPostByUserId.firstname} {dataOfUserToLikeInPostByUserId.lastname}</b>

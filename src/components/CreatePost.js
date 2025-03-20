@@ -231,7 +231,7 @@ const CreatePost = ({ userData, activeUserId, userInfo, createPostStatus, setCre
             <div className='box-of-user-profile-img'>
               <div className='container-user-profile-img'>
                 {dataOfUserByActiveUserId !== undefined &&
-                  <img src={`${process.env.REACT_APP_SERVER_DOMAIN}/userProfileImg/${!dataOfUserByActiveUserId.profilePicture ? 'profileImgDefault.jpg' : dataOfUserByActiveUserId.profilePicture}`} alt='imgProfile' />
+                  <img src={`${process.env.REACT_APP_PROFILE_IMG_S3}/${!dataOfUserByActiveUserId.profilePicture ? 'profileImgDefault.jpg' : dataOfUserByActiveUserId.profilePicture}`} alt='imgProfile' />
                 }
               </div>
             </div>

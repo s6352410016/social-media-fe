@@ -705,7 +705,7 @@ const Chat = ({ setLogoutStatus }) => {
                 <SkeletonUserProfileInHambuger />
                 :
                 <Link to={`/profile/${userDataInActive._id}`} className='container-user-profile-in-hidden-content-in-header-popup'>
-                  <img src={`${process.env.REACT_APP_SERVER_DOMAIN}/userProfileImg/${!userDataInActive.profilePicture ? 'profileImgDefault.jpg' : userDataInActive.profilePicture}`} alt='profileImg' />
+                  <img src={`${process.env.REACT_APP_PROFILE_IMG_S3}/${!userDataInActive.profilePicture ? 'profileImgDefault.jpg' : userDataInActive.profilePicture}`} alt='profileImg' />
                   <div className='container-fullname-in-container-user-profile-in-hidden-content-in-header-popup'>
                     <p>{userDataInActive.firstname} {userDataInActive.lastname}</p>
                   </div>
@@ -805,7 +805,7 @@ const Chat = ({ setLogoutStatus }) => {
             chatIdToCreateChatMsg !== "" && showChatHeader &&
             <div className='message-header-in-chat-msg-user-container-in-chat-container-in-chat-page'>
               <Link to={`/profile/${chatUserData?._id}`} className='container-profile-img-in-container-user-chat-list-profile'>
-                <img src={`${process.env.REACT_APP_SERVER_DOMAIN}/userProfileImg/${!chatUserData?.profilePicture ? 'profileImgDefault.jpg' : chatUserData?.profilePicture}`} alt='userProfileImg' />
+                <img src={`${process.env.REACT_APP_PROFILE_IMG_S3}/${!chatUserData?.profilePicture ? 'profileImgDefault.jpg' : chatUserData?.profilePicture}`} alt='userProfileImg' />
                 <div className={`active-user-status-in-container-profile-img-in-container-user-chat-list-profile ${chatUserData?.active && 'active'}`}></div>
               </Link>
               <div className='user-info-data-chat'>

@@ -478,7 +478,7 @@ const Reply = ({ replyId, commentIdToReply, userIdToReply, replyMsgs, replyImg, 
             <div className='container-comments-of-user-detail-in-container-comments-of-users'>
                 <div className='box-of-container-img-profile-in-container-comments-of-user-detail-in-container-comments-of-users'>
                     <Link onClick={() => setShowProfilePageStatus(!showProfilePageStatus)} to={`/profile/${dataUserByUserIdToReply?._id}`} className='container-img-profile-in-container-comments-of-user-detail-in-container-comments-of-users'>
-                        <img src={`${process.env.REACT_APP_SERVER_DOMAIN}/userProfileImg/${!dataUserByUserIdToReply?.profilePicture ? 'profileImgDefault.jpg' : dataUserByUserIdToReply?.profilePicture}`} alt='imgProfile' />
+                        <img src={`${process.env.REACT_APP_PROFILE_IMG_S3}/${!dataUserByUserIdToReply?.profilePicture ? 'profileImgDefault.jpg' : dataUserByUserIdToReply?.profilePicture}`} alt='imgProfile' />
                     </Link>
                 </div>
                 <div className='main-container-fix-reply-comment-update'>
@@ -530,7 +530,7 @@ const Reply = ({ replyId, commentIdToReply, userIdToReply, replyMsgs, replyImg, 
                                                     </p>
                                                 </div>
                                                 <div className='container-comment-img-in-container-comments-of-user-detail-in-container-comments-of-users'>
-                                                    <img src={`${process.env.REACT_APP_SERVER_DOMAIN}/replyImg/${replyImg}`} alt='commentImg' />
+                                                    <img src={`${process.env.REACT_APP_REPLY_IMG_S3}/${replyImg}`} alt='commentImg' />
                                                 </div>
                                             </>
                                         }
@@ -550,7 +550,7 @@ const Reply = ({ replyId, commentIdToReply, userIdToReply, replyMsgs, replyImg, 
                                                     <Link to={`/profile/${tagUserData?._id}`} style={{ fontWeight: "bold", color: "#0074FE", textDecoration: "none"}}>@{tagUserData?.firstname} {tagUserData?.lastname} </Link>
                                                 }
                                                 <div className='container-comment-img-in-container-comments-of-user-detail-in-container-comments-of-users'>
-                                                    <img src={`${process.env.REACT_APP_SERVER_DOMAIN}/replyImg/${replyImg}`} alt='commentImg' />
+                                                    <img src={`${process.env.REACT_APP_REPLY_IMG_S3}/${replyImg}`} alt='commentImg' />
                                                 </div>
                                             </>
                                         }
@@ -619,7 +619,7 @@ const Reply = ({ replyId, commentIdToReply, userIdToReply, replyMsgs, replyImg, 
                                 }
                                 <div style={{ height: "35px", marginBottom: "10px" }} className='create-comment-container-in-post-of-users fix-reply-update'>
                                     <Link onClick={() => setShowProfilePageStatus(!showProfilePageStatus)} to={`/profile/${activeUserData?._id}`} style={{ width: "35px", height: "35px" }} className='container-img-profile-in-create-comment-container-in-post-of-users fix-reply-update'>
-                                        <img src={`${process.env.REACT_APP_SERVER_DOMAIN}/userProfileImg/${!activeUserData?.profilePicture ? 'profileImgDefault.jpg' : activeUserData?.profilePicture}`} alt='imgProfileUser' />
+                                        <img src={`${process.env.REACT_APP_PROFILE_IMG_S3}/${!activeUserData?.profilePicture ? 'profileImgDefault.jpg' : activeUserData?.profilePicture}`} alt='imgProfileUser' />
                                     </Link>
                                     <div className='write-comment-container-in-create-comment-container-in-post-of-users fix-reply-update'>
                                         <form onSubmit={(e) => createReply(e)} encType='multipart/form-data'>
@@ -671,7 +671,7 @@ const Reply = ({ replyId, commentIdToReply, userIdToReply, replyMsgs, replyImg, 
                                         <div className='container-img-preview-in-edit-comment-in-container-edit-comment-in-container-comments-of-user-detail-in-container-comments-of-users'>
                                             <div className='box-of-img-in-container-img-preview-in-edit-comment-in-container-edit-comment-in-container-comments-of-user-detail-in-container-comments-of-users'>
                                                 <FontAwesomeIcon onClick={clearFileToSelect} icon={faCircleXmark} className='icon-xmark-in-box-of-img-in-container-img-preview-in-edit-comment-in-container-edit-comment-in-container-comments-of-user-detail-in-container-comments-of-users' />
-                                                <img src={`${process.env.REACT_APP_SERVER_DOMAIN}/replyImg/${replyImg}`} alt='imgPreviewInEditComment' />
+                                                <img src={`${process.env.REACT_APP_REPLY_IMG_S3}/${replyImg}`} alt='imgPreviewInEditComment' />
                                             </div>
                                         </div>
                                         :

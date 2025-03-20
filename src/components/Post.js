@@ -733,7 +733,7 @@ const Post = ({ setSortAllPostAscending, setOpenProfileStatus, showProfilePageSt
                 <Link to={`/profile/${DataOfUserByUserId._id}`} className='link-container-of-img'>
                     <div className='container-of-img-profile-users'>
                         <div className='container-width-full-img'>
-                            <img src={`${process.env.REACT_APP_SERVER_DOMAIN}/userProfileImg/${!DataOfUserByUserId.profilePicture ? 'profileImgDefault.jpg' : DataOfUserByUserId.profilePicture}`} alt='profileImg' />
+                            <img src={`${process.env.REACT_APP_PROFILE_IMG_S3}/${!DataOfUserByUserId.profilePicture ? 'profileImgDefault.jpg' : DataOfUserByUserId.profilePicture}`} alt='profileImg' />
                         </div>
                     </div>
                 </Link>
@@ -806,7 +806,7 @@ const Post = ({ setSortAllPostAscending, setOpenProfileStatus, showProfilePageSt
                                 <div className='container-body-in-container-edit-post-content-in-container-edit-post-in-icon-settings-post-of-users'>
                                     <div className='container-header-in-container-body-in-container-edit-post-content-in-container-edit-post-in-icon-settings-post-of-users'>
                                         <Link to={`/profile/${DataOfUserByUserId._id}`} className='container-img-in-container-header-in-container-body-in-container-edit-post-content-in-container-edit-post-in-icon-settings-post-of-users'>
-                                            <img src={`${process.env.REACT_APP_SERVER_DOMAIN}/userProfileImg/${!DataOfUserByUserId.profilePicture ? 'profileImgDefault.jpg' : DataOfUserByUserId.profilePicture}`} alt='imgProfile' />
+                                            <img src={`${process.env.REACT_APP_PROFILE_IMG_S3}/${!DataOfUserByUserId.profilePicture ? 'profileImgDefault.jpg' : DataOfUserByUserId.profilePicture}`} alt='imgProfile' />
                                         </Link>
                                         <div className='container-fullname-in-container-header-in-container-body-in-container-edit-post-content-in-container-edit-post-in-icon-settings-post-of-users'>
                                             <Link to={`/profile/${DataOfUserByUserId._id}`} className='link-container-in-container-fullname-in-container-header-in-container-body-in-container-edit-post-content-in-container-edit-post-in-icon-settings-post-of-users'>
@@ -1031,7 +1031,7 @@ const Post = ({ setSortAllPostAscending, setOpenProfileStatus, showProfilePageSt
                                     <div className='body-share-content-post-in-container-share-content-post-in-container-icons-in-content-footer'>
                                         <div className='container-user-data-in-body-share-content-post-in-container-share-content-post-in-container-icons-in-content-footer'>
                                             <Link onClick={() => setShowProfilePageStatus(!showProfilePageStatus)} to={`/profile/${dataOfUserActiveByUserId._id}`} className='container-img-profile-in-container-user-data-in-body-share-content-post-in-container-share-content-post-in-container-icons-in-content-footer'>
-                                                <img src={`${process.env.REACT_APP_SERVER_DOMAIN}/userProfileImg/${!dataOfUserActiveByUserId.profilePicture ? 'profileImgDefault.jpg' : dataOfUserActiveByUserId.profilePicture}`} alt='imgProfile' />
+                                                <img src={`${process.env.REACT_APP_PROFILE_IMG_S3}/${!dataOfUserActiveByUserId.profilePicture ? 'profileImgDefault.jpg' : dataOfUserActiveByUserId.profilePicture}`} alt='imgProfile' />
                                             </Link>
                                             <div className='container-fullname-of-user-in-container-user-data-in-body-share-content-post-in-container-share-content-post-in-container-icons-in-content-footer'>
                                                 <Link onClick={() => setShowProfilePageStatus(!showProfilePageStatus)} to={`/profile/${dataOfUserActiveByUserId._id}`} className='text-decoration-in-container-fullname-of-user-in-container-user-data-in-body-share-content-post-in-container-share-content-post-in-container-icons-in-content-footer'>
@@ -1080,7 +1080,7 @@ const Post = ({ setSortAllPostAscending, setOpenProfileStatus, showProfilePageSt
                                             <div className='container-data-of-user-post-to-share-in-body-share-content-post-in-container-share-content-post-in-container-icons-in-content-footer'>
                                                 <div className='container-user-data-in-container-data-of-user-post-to-share-in-body-share-content-post-in-container-share-content-post-in-container-icons-in-content-footer'>
                                                     <Link onClick={() => setShowProfilePageStatus(!showProfilePageStatus)} to={`/profile/${DataOfUserByUserId._id}`} className='container-img-in-container-user-data-in-container-data-of-user-post-to-share-in-body-share-content-post-in-container-share-content-post-in-container-icons-in-content-footer'>
-                                                        <img src={`${process.env.REACT_APP_SERVER_DOMAIN}/userProfileImg/${!DataOfUserByUserId.profilePicture ? 'profileImgDefault.jpg' : DataOfUserByUserId.profilePicture}`} alt='imgProfile' />
+                                                        <img src={`${process.env.REACT_APP_PROFILE_IMG_S3}/${!DataOfUserByUserId.profilePicture ? 'profileImgDefault.jpg' : DataOfUserByUserId.profilePicture}`} alt='imgProfile' />
                                                     </Link>
                                                     <div className='container-fullname-of-user-in-container-user-data-in-container-data-of-user-post-to-share-in-body-share-content-post-in-container-share-content-post-in-container-icons-in-content-footer'>
                                                         <Link onClick={() => setShowProfilePageStatus(!showProfilePageStatus)} to={`/profile/${DataOfUserByUserId._id}`} className='text-decoration-none-in-container-fullname-of-user-in-container-user-data-in-container-data-of-user-post-to-share-in-body-share-content-post-in-container-share-content-post-in-container-icons-in-content-footer'>
@@ -1132,7 +1132,7 @@ const Post = ({ setSortAllPostAscending, setOpenProfileStatus, showProfilePageSt
             </div>
             <div className='create-comment-container-in-post-of-users'>
                 <Link onClick={openProfilePage} to={`/profile/${dataOfUserActiveByUserId._id}`} className='container-img-profile-in-create-comment-container-in-post-of-users'>
-                    <img src={`${process.env.REACT_APP_SERVER_DOMAIN}/userProfileImg/${!dataOfUserActiveByUserId.profilePicture ? 'profileImgDefault.jpg' : dataOfUserActiveByUserId.profilePicture}`} alt='imgProfileUser' />
+                    <img src={`${process.env.REACT_APP_PROFILE_IMG_S3}/${!dataOfUserActiveByUserId.profilePicture ? 'profileImgDefault.jpg' : dataOfUserActiveByUserId.profilePicture}`} alt='imgProfileUser' />
                 </Link>
                 <div className='write-comment-container-in-create-comment-container-in-post-of-users'>
                     <form onSubmit={(e) => createComment(e)} encType='multipart/form-data'>

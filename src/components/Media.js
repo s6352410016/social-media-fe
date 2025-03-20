@@ -565,7 +565,7 @@ const Media = ({ setLogoutStatus }) => {
                 <SkeletonUserProfileInHambuger />
                 :
                 <Link to={`/profile/${userDataInActive._id}`} className='container-user-profile-in-hidden-content-in-header-popup'>
-                  <img src={`${process.env.REACT_APP_SERVER_DOMAIN}/userProfileImg/${!userDataInActive.profilePicture ? 'profileImgDefault.jpg' : userDataInActive.profilePicture}`} alt='profileImg' />
+                  <img src={`${process.env.REACT_APP_PROFILE_IMG_S3}/${!userDataInActive.profilePicture ? 'profileImgDefault.jpg' : userDataInActive.profilePicture}`} alt='profileImg' />
                   <div className='container-fullname-in-container-user-profile-in-hidden-content-in-header-popup'>
                     <p>{userDataInActive.firstname} {userDataInActive.lastname}</p>
                   </div>
@@ -659,7 +659,7 @@ const Media = ({ setLogoutStatus }) => {
                 ?
                 <Link to={`/profile/${userDataInActive._id}`} className='container-user-profile-in-container-content-right-in-body'>
                   <div className='container-img-container-user-profile-in-container-content-right-in-body'>
-                    <img src={`${process.env.REACT_APP_SERVER_DOMAIN}/userProfileImg/${!userDataInActive.profilePicture ? 'profileImgDefault.jpg' : userDataInActive.profilePicture}`} alt='profileImg' />
+                    <img src={`${process.env.REACT_APP_PROFILE_IMG_S3}/${!userDataInActive.profilePicture ? 'profileImgDefault.jpg' : userDataInActive.profilePicture}`} alt='profileImg' />
                   </div>
                   <div className='container-fullname-active-user-in-container-user-profile-in-container-content-right-in-body'>
                     <b>{userDataInActive.firstname} {userDataInActive.lastname}</b>

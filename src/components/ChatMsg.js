@@ -18,7 +18,7 @@ const ChatMsg = ({ fullnameUserChat, userInfo, senderId, chatMsg, chatImages, cr
   return (
     <div ref={chatRef} className='container-profile-user-in-container-msg-chat-of-user-in-chat-msg-user-container-in-chat-container-in-chat-page'>
       <Link to={`/profile/${userDataBySenderId._id}`} className='container-profile-user-img-in-container-profile-user-in-container-msg-chat-of-user-in-chat-msg-user-container-in-chat-container-in-chat-page'>
-        <img src={`${process.env.REACT_APP_SERVER_DOMAIN}/userProfileImg/${!userDataBySenderId.profilePicture ? 'profileImgDefault.jpg' : userDataBySenderId.profilePicture}`} alt='userProfileImg' />
+        <img src={`${process.env.REACT_APP_PROFILE_IMG_S3}/${!userDataBySenderId.profilePicture ? 'profileImgDefault.jpg' : userDataBySenderId.profilePicture}`} alt='userProfileImg' />
       </Link>
       <div className='fix-layout-in-container-profile-user-in-container-msg-chat-of-user-in-chat-msg-user-container-in-chat-container-in-chat-page'>
         {chatImages.length === 0 && chatMsg !== '' &&
@@ -46,7 +46,7 @@ const ChatMsg = ({ fullnameUserChat, userInfo, senderId, chatMsg, chatImages, cr
               {chatImages.length !== 0 && chatMsg === '' &&
                 chatImages.map((e, index) => (
                   <div key={index} className='container-chat-img-width-in-container-msg-chat-in-container-profile-user-in-container-msg-chat-of-user-in-chat-msg-user-container-in-chat-container-in-chat-page'>
-                    <img src={`${process.env.REACT_APP_SERVER_DOMAIN}/chatImg/${e}`} alt='chatImg' />
+                    <img src={`${process.env.REACT_APP_CHAT_IMG_S3}/${e}`} alt='chatImg' />
                   </div>
                 ))
               }
@@ -64,7 +64,7 @@ const ChatMsg = ({ fullnameUserChat, userInfo, senderId, chatMsg, chatImages, cr
             <div style={{ gridTemplateColumns: `repeat(${chatImages.length > 3 ? '3' : chatImages.length} , 150px)` }} className='container-chat-img-in-container-msg-chat-in-container-profile-user-in-container-msg-chat-of-user-in-chat-msg-user-container-in-chat-container-in-chat-page'>
               {chatImages.map((e, index) => (
                 <div key={index} className='container-chat-img-width-in-container-msg-chat-in-container-profile-user-in-container-msg-chat-of-user-in-chat-msg-user-container-in-chat-container-in-chat-page'>
-                  <img src={`${process.env.REACT_APP_SERVER_DOMAIN}/chatImg/${e}`} alt='chatImg' />
+                  <img src={`${process.env.REACT_APP_CHAT_IMG_S3}/${e}`} alt='chatImg' />
                 </div>
               ))}
             </div>

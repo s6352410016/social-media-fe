@@ -537,7 +537,7 @@ const Comment = ({ setCommentOfUsers, postId, followAndUnFollow, setFollowAndUnF
             <div className='container-comments-of-user-detail-in-container-comments-of-users'>
                 <div className='box-of-container-img-profile-in-container-comments-of-user-detail-in-container-comments-of-users'>
                     <Link onClick={() => setShowProfilePageStatus(!showProfilePageStatus)} to={`/profile/${dataCommentOfUserByUserId._id}`} className='container-img-profile-in-container-comments-of-user-detail-in-container-comments-of-users'>
-                        <img src={`${process.env.REACT_APP_SERVER_DOMAIN}/userProfileImg/${!dataCommentOfUserByUserId.profilePicture ? 'profileImgDefault.jpg' : dataCommentOfUserByUserId.profilePicture}`} alt='imgProfile' />
+                        <img src={`${process.env.REACT_APP_PROFILE_IMG_S3}/${!dataCommentOfUserByUserId.profilePicture ? 'profileImgDefault.jpg' : dataCommentOfUserByUserId.profilePicture}`} alt='imgProfile' />
                     </Link>
                 </div>
                 <div className='main-container-fix-reply-comment-update'>
@@ -561,7 +561,7 @@ const Comment = ({ setCommentOfUsers, postId, followAndUnFollow, setFollowAndUnF
                                                 <p>{commentMsgs}</p>
                                             </div>
                                             <div className='container-comment-img-in-container-comments-of-user-detail-in-container-comments-of-users'>
-                                                <img src={`${process.env.REACT_APP_SERVER_DOMAIN}/commentImg/${commentImg}`} alt='commentImg' />
+                                                <img src={`${process.env.REACT_APP_COMMENT_IMG_S3}/${commentImg}`} alt='commentImg' />
                                             </div>
                                         </div>
                                     </>
@@ -590,7 +590,7 @@ const Comment = ({ setCommentOfUsers, postId, followAndUnFollow, setFollowAndUnF
                                                     <span className='modity-date-in-container-fix-fullname-of-user-comment-in-container-comments-of-user-detail-in-container-comments-of-users'>{format(createdAt)}</span>
                                                 </div>
                                                 <div className='container-comment-img-in-container-comments-of-user-detail-in-container-comments-of-users'>
-                                                    <img src={`${process.env.REACT_APP_SERVER_DOMAIN}/commentImg/${commentImg}`} alt='commentImg' />
+                                                    <img src={`${process.env.REACT_APP_COMMENT_IMG_S3}/${commentImg}`} alt='commentImg' />
                                                 </div>
                                             </div>
                                             :
@@ -697,7 +697,7 @@ const Comment = ({ setCommentOfUsers, postId, followAndUnFollow, setFollowAndUnF
                                         <div style={{ marginBottom: "10px" }} className='container-img-preview-in-edit-comment-in-container-edit-comment-in-container-comments-of-user-detail-in-container-comments-of-users'>
                                             <div className='box-of-img-in-container-img-preview-in-edit-comment-in-container-edit-comment-in-container-comments-of-user-detail-in-container-comments-of-users'>
                                                 <FontAwesomeIcon onClick={clearFileToSelect} icon={faCircleXmark} className='icon-xmark-in-box-of-img-in-container-img-preview-in-edit-comment-in-container-edit-comment-in-container-comments-of-user-detail-in-container-comments-of-users' />
-                                                <img src={`${process.env.REACT_APP_SERVER_DOMAIN}/commentImg/${commentImg}`} alt='imgPreviewInEditComment' />
+                                                <img src={`${process.env.REACT_APP_COMMENT_IMG_S3}/${commentImg}`} alt='imgPreviewInEditComment' />
                                             </div>
                                         </div>
                                         :
@@ -736,7 +736,7 @@ const Comment = ({ setCommentOfUsers, postId, followAndUnFollow, setFollowAndUnF
                         {openReplyComment &&
                             <div style={{ height: "35px", marginBottom: "10px" }} className='create-comment-container-in-post-of-users fix-reply-update'>
                                 <Link style={{ width: "35px", height: "35px" }} onClick={() => setShowProfilePageStatus(!showProfilePageStatus)} to={`/profile/${dataUserActive?._id}`} className='container-img-profile-in-create-comment-container-in-post-of-users fix-reply-update'>
-                                    <img src={`${process.env.REACT_APP_SERVER_DOMAIN}/userProfileImg/${!dataUserActive?.profilePicture ? 'profileImgDefault.jpg' : dataUserActive?.profilePicture}`} alt='imgProfileUser' />
+                                    <img src={`${process.env.REACT_APP_PROFILE_IMG_S3}/${!dataUserActive?.profilePicture ? 'profileImgDefault.jpg' : dataUserActive?.profilePicture}`} alt='imgProfileUser' />
                                 </Link>
                                 <div className='write-comment-container-in-create-comment-container-in-post-of-users fix-reply-update'>
                                     <form onSubmit={(e) => createReplyComment(e)} encType='multipart/form-data'>

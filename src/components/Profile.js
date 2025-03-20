@@ -878,7 +878,7 @@ const Profile = ({ setLogoutStatus }) => {
                 <SkeletonUserProfileInHambuger />
                 :
                 <Link to={`/profile/${userDataInActive._id}`} className='container-user-profile-in-hidden-content-in-header-popup'>
-                  <img src={`${process.env.REACT_APP_SERVER_DOMAIN}/userProfileImg/${!userDataFollow?.profilePicture ? 'profileImgDefault.jpg' : userDataFollow?.profilePicture}`} alt='profileImg' />
+                  <img src={`${process.env.REACT_APP_PROFILE_IMG_S3}/${!userDataFollow?.profilePicture ? 'profileImgDefault.jpg' : userDataFollow?.profilePicture}`} alt='profileImg' />
                   <div className='container-fullname-in-container-user-profile-in-hidden-content-in-header-popup'>
                     <p>{userData.firstname} {userData.lastname}</p>
                   </div>
@@ -917,9 +917,9 @@ const Profile = ({ setLogoutStatus }) => {
                 ?
                 userDataInActive._id === userData.userId
                   ?
-                  <img onClick={() => setOpenEditProfileBackgroundPopup(true)} src={`${process.env.REACT_APP_SERVER_DOMAIN}/userProfileBgImg/${!userDataInActive.profileBackground ? 'bgDefault.png' : userDataInActive.profileBackground}`} alt='imgProfileBackground' />
+                  <img onClick={() => setOpenEditProfileBackgroundPopup(true)} src={`${process.env.REACT_APP_BG_IMG_S3}/${!userDataInActive.profileBackground ? 'bgDefault.png' : userDataInActive.profileBackground}`} alt='imgProfileBackground' />
                   :
-                  <img style={{ cursor: 'default' }} src={`${process.env.REACT_APP_SERVER_DOMAIN}/userProfileBgImg/${!userDataInActive.profileBackground ? 'bgDefault.png' : userDataInActive.profileBackground}`} alt='imgProfileBackground' />
+                  <img style={{ cursor: 'default' }} src={`${process.env.REACT_APP_BG_IMG_S3}/${!userDataInActive.profileBackground ? 'bgDefault.png' : userDataInActive.profileBackground}`} alt='imgProfileBackground' />
                 :
                 <></>
             }
@@ -954,15 +954,15 @@ const Profile = ({ setLogoutStatus }) => {
                     ?
                     !objURLOfProfileBackgroundImg && userDataInActive?.profileBackground !== ''
                       ?
-                      <img onClick={() => inputUploadProfileBgImg.current.click()} src={`${process.env.REACT_APP_SERVER_DOMAIN}/userProfileBgImg/${userDataInActive?.profileBackground}`} alt='imgProfileBackground hee' />
+                      <img onClick={() => inputUploadProfileBgImg.current.click()} src={`${process.env.REACT_APP_BG_IMG_S3}/${userDataInActive?.profileBackground}`} alt='imgProfileBackground hee' />
                       :
                       <img onClick={() => inputUploadProfileBgImg.current.click()} src={objURLOfProfileBackgroundImg} alt='imgProfileBackground kuy' />
                     :
                     userDataInActive?.profileBackground !== ''
                       ?
-                      <img onClick={() => inputUploadProfileBgImg.current.click()} src={`${process.env.REACT_APP_SERVER_DOMAIN}/userProfileBgImg/${userDataInActive?.profileBackground}`} alt='imgProfileBackground xx' />
+                      <img onClick={() => inputUploadProfileBgImg.current.click()} src={`${process.env.REACT_APP_BG_IMG_S3}/${userDataInActive?.profileBackground}`} alt='imgProfileBackground xx' />
                       :
-                      <img onClick={() => inputUploadProfileBgImg.current.click()} src={`${process.env.REACT_APP_SERVER_DOMAIN}/userProfileBgImg/bgDefault.png`} alt='imgProfileBackground yy' />
+                      <img onClick={() => inputUploadProfileBgImg.current.click()} src={`${process.env.REACT_APP_BG_IMG_S3}/bgDefault.png`} alt='imgProfileBackground yy' />
                   }
                 </div>
                 <input name='profileBgImg' onChange={selectProfileBgImgToUpload} style={{ display: 'none' }} ref={inputUploadProfileBgImg} type='file' accept='image/png , image/jpeg , image/webp' onClick={(e) => e.target.value = null}></input>
@@ -1063,9 +1063,9 @@ const Profile = ({ setLogoutStatus }) => {
                   ?
                   userDataInActive._id === userData.userId
                     ?
-                    <img onClick={() => setOpenEditProfilePicturePopup(true)} src={`${process.env.REACT_APP_SERVER_DOMAIN}/userProfileImg/${!userDataInActive.profilePicture ? 'profileImgDefault.jpg' : userDataInActive.profilePicture}`} alt='imgProfile' />
+                    <img onClick={() => setOpenEditProfilePicturePopup(true)} src={`${process.env.REACT_APP_PROFILE_IMG_S3}/${!userDataInActive.profilePicture ? 'profileImgDefault.jpg' : userDataInActive.profilePicture}`} alt='imgProfile' />
                     :
-                    <img style={{ cursor: 'default' }} src={`${process.env.REACT_APP_SERVER_DOMAIN}/userProfileImg/${!userDataInActive.profilePicture ? 'profileImgDefault.jpg' : userDataInActive.profilePicture}`} alt='imgProfile' />
+                    <img style={{ cursor: 'default' }} src={`${process.env.REACT_APP_PROFILE_IMG_S3}/${!userDataInActive.profilePicture ? 'profileImgDefault.jpg' : userDataInActive.profilePicture}`} alt='imgProfile' />
                   :
                   <></>
               }
@@ -1098,11 +1098,11 @@ const Profile = ({ setLogoutStatus }) => {
                         </div>
                         :
                         <div className='container-profile-img-preview-in-container-edit-profile-img-box-in-container-edit-profile-img-popup-in-container-user-profile-img-in-container-user-detail-profile-in-container-user-profile-in-container-body-in-container-profile'>
-                          <img onClick={() => inputUploadProfileImg.current.click()} src={`${process.env.REACT_APP_SERVER_DOMAIN}/userProfileImg/${!userDataInActive.profilePicture ? 'profileImgDefault.jpg' : userDataInActive.profilePicture}`} alt='profileImg' />
+                          <img onClick={() => inputUploadProfileImg.current.click()} src={`${process.env.REACT_APP_PROFILE_IMG_S3}/${!userDataInActive.profilePicture ? 'profileImgDefault.jpg' : userDataInActive.profilePicture}`} alt='profileImg' />
                         </div>
                       :
                       <div className='container-profile-img-preview-in-container-edit-profile-img-box-in-container-edit-profile-img-popup-in-container-user-profile-img-in-container-user-detail-profile-in-container-user-profile-in-container-body-in-container-profile'>
-                        <img onClick={() => inputUploadProfileImg.current.click()} src={`${process.env.REACT_APP_SERVER_DOMAIN}/userProfileImg/${!userDataInActive.profilePicture ? 'profileImgDefault.jpg' : userDataInActive.profilePicture}`} alt='profileImg' />
+                        <img onClick={() => inputUploadProfileImg.current.click()} src={`${process.env.REACT_APP_PROFILE_IMG_S3}/${!userDataInActive.profilePicture ? 'profileImgDefault.jpg' : userDataInActive.profilePicture}`} alt='profileImg' />
                       </div>
                     }
                     <div onClick={() => setDeleteCurrentProfileImg(true)} className='container-body-in-container-edit-profile-img-box-in-container-edit-profile-img-popup-in-container-user-profile-img-in-container-user-detail-profile-in-container-user-profile-in-container-body-in-container-profile-delete-img'>

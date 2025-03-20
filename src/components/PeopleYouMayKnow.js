@@ -36,7 +36,7 @@ const PeopleYouMayKnow = ({ followAndUnFollow, setFollowAndUnFollow, activeUserI
             <Link to={`/profile/${userId}`} className='text-decoration-none-in-container-people-you-may-know' id='fix-container-img'>
                 <div className='container-image-people-you-may-know'>
                     <div className='img-container-people-you-may-know'>
-                        <img src={`${process.env.REACT_APP_SERVER_DOMAIN}/userProfileImg/${!image ? 'profileImgDefault.jpg' : image}`} alt='imageForUser' />
+                        <img src={`${process.env.REACT_APP_PROFILE_IMG_S3}/${!image ? 'profileImgDefault.jpg' : image}`} alt='imageForUser' />
                     </div>
                 </div>
             </Link>

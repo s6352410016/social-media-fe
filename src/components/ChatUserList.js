@@ -118,7 +118,7 @@ const ChatUserList = ({ setShowIconFetchMsg, setShowChatBody, setShowChatHeader,
   return (
     <div onClick={() => getChatMsg(index)} className={`container-user-chat-list-profile ${selectedChat === index ? 'active-bg' : ''}`}>
       <div className='container-profile-img-in-container-user-chat-list-profile'>
-        <img src={`${process.env.REACT_APP_SERVER_DOMAIN}/userProfileImg/${!dataChatOfUserByuserId.profilePicture ? 'profileImgDefault.jpg' : dataChatOfUserByuserId.profilePicture}`} alt='userProfileImg' />
+        <img src={`${process.env.REACT_APP_PROFILE_IMG_S3}/${!dataChatOfUserByuserId.profilePicture ? 'profileImgDefault.jpg' : dataChatOfUserByuserId.profilePicture}`} alt='userProfileImg' />
         <div className='active-user-status-in-container-profile-img-in-container-user-chat-list-profile active'></div>
         {dataChatOfUserByuserId.active === true
           ?

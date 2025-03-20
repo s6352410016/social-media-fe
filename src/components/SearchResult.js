@@ -7,7 +7,7 @@ const SearchResult = ({setOpenProfileStatus, userId, image, firstname, lastname 
       <div className='search-result-container'>
         <div className='search-result-image-user'>
           <div className='search-result-image-container'>
-            <img className='search-img-user' src={`${process.env.REACT_APP_SERVER_DOMAIN}/userProfileImg/${!image ? 'profileImgDefault.jpg' : image}`} alt='imageUser' />
+            <img className='search-img-user' src={`${process.env.REACT_APP_PROFILE_IMG_S3}/${!image ? 'profileImgDefault.jpg' : image}`} alt='imageUser' />
           </div>
         </div>
         <div className='search-result-fullname-user'>

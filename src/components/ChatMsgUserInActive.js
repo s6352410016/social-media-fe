@@ -30,7 +30,7 @@ const ChatMsgUserInActive = ({ senderId, userInfo, chatMsg, chatImages, createdA
                         </div>
                     </div>
                     <Link to={`/profile/${userDataBySenderId._id}`} className='container-profile-user-img-in-container-profile-user-in-container-msg-chat-of-user-in-chat-msg-user-container-in-chat-container-in-chat-page'>
-                        <img src={`${process.env.REACT_APP_SERVER_DOMAIN}/userProfileImg/${!userDataBySenderId.profilePicture ? 'profileImgDefault.jpg' : userDataBySenderId.profilePicture}`} alt='userProfileImg' />
+                        <img src={`${process.env.REACT_APP_PROFILE_IMG_S3}/${!userDataBySenderId.profilePicture ? 'profileImgDefault.jpg' : userDataBySenderId.profilePicture}`} alt='userProfileImg' />
                     </Link>
                 </>
             }
@@ -46,13 +46,13 @@ const ChatMsgUserInActive = ({ senderId, userInfo, chatMsg, chatImages, createdA
                         <div style={{ gridTemplateColumns: `repeat(${chatImages.length > 3 ? '3' : chatImages.length} , 150px)` }} className='container-chat-img-in-container-msg-chat-in-container-profile-user-in-container-msg-chat-of-user-in-chat-msg-user-container-in-chat-container-in-chat-page active'>
                             {chatImages.map((e, index) => (
                                 <div key={index} className='container-chat-img-width-in-container-msg-chat-in-container-profile-user-in-container-msg-chat-of-user-in-chat-msg-user-container-in-chat-container-in-chat-page'>
-                                    <img src={`${process.env.REACT_APP_SERVER_DOMAIN}/chatImg/${e}`} alt='chatImg' />
+                                    <img src={`${process.env.REACT_APP_CHAT_IMG_S3}/${e}`} alt='chatImg' />
                                 </div>
                             ))}
                         </div>
                     </div>
                     <Link to={`/profile/${userDataBySenderId._id}`} className='container-profile-user-img-in-container-profile-user-in-container-msg-chat-of-user-in-chat-msg-user-container-in-chat-container-in-chat-page'>
-                        <img src={`${process.env.REACT_APP_SERVER_DOMAIN}/userProfileImg/${!userDataBySenderId.profilePicture ? 'profileImgDefault.jpg' : userDataBySenderId.profilePicture}`} alt='userProfileImg' />
+                        <img src={`${process.env.REACT_APP_PROFILE_IMG_S3}/${!userDataBySenderId.profilePicture ? 'profileImgDefault.jpg' : userDataBySenderId.profilePicture}`} alt='userProfileImg' />
                     </Link>
                 </>
             }
@@ -68,7 +68,7 @@ const ChatMsgUserInActive = ({ senderId, userInfo, chatMsg, chatImages, createdA
                         <div style={{ gridTemplateColumns: `repeat(${chatImages.length > 3 ? '3' : chatImages.length} , 150px)` }} className='container-chat-img-in-container-msg-chat-in-container-profile-user-in-container-msg-chat-of-user-in-chat-msg-user-container-in-chat-container-in-chat-page active'>
                             {chatImages.map((e, index) => (
                                 <div key={index} className='container-chat-img-width-in-container-msg-chat-in-container-profile-user-in-container-msg-chat-of-user-in-chat-msg-user-container-in-chat-container-in-chat-page'>
-                                    <img src={`${process.env.REACT_APP_SERVER_DOMAIN}/chatImg/${e}`} alt='chatImg' />
+                                    <img src={`${process.env.REACT_APP_CHAT_IMG_S3}/${e}`} alt='chatImg' />
                                 </div>
                             ))}
                         </div>
@@ -77,7 +77,7 @@ const ChatMsgUserInActive = ({ senderId, userInfo, chatMsg, chatImages, createdA
                         </div>
                     </div>
                     <Link to={`/profile/${userDataBySenderId._id}`} className='container-profile-user-img-in-container-profile-user-in-container-msg-chat-of-user-in-chat-msg-user-container-in-chat-container-in-chat-page'>
-                        <img src={`${process.env.REACT_APP_SERVER_DOMAIN}/userProfileImg/${!userDataBySenderId.profilePicture ? 'profileImgDefault.jpg' : userDataBySenderId.profilePicture}`} alt='userProfileImg' />
+                        <img src={`${process.env.REACT_APP_PROFILE_IMG_S3}/${!userDataBySenderId.profilePicture ? 'profileImgDefault.jpg' : userDataBySenderId.profilePicture}`} alt='userProfileImg' />
                     </Link>
                 </>
             }

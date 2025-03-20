@@ -46,7 +46,7 @@ const Following = ({ setOpenFollowingPopup, showProfilePageStatus, setShowProfil
     return (
         <div className='container-profile-card-in-people-likes-post-list'>
             <Link onClick={openProfilePage} to={`/profile/${userIdToFollower}`} className='container-img-in-center-in-people-likes-post-list'>
-                <img src={`${process.env.REACT_APP_SERVER_DOMAIN}/userProfileImg/${!dataOfUserToFollowerByUserId.profilePicture ? 'profileImgDefault.jpg' : dataOfUserToFollowerByUserId.profilePicture}`} alt='imgProfile' />
+                <img src={`${process.env.REACT_APP_PROFILE_IMG_S3}/${!dataOfUserToFollowerByUserId.profilePicture ? 'profileImgDefault.jpg' : dataOfUserToFollowerByUserId.profilePicture}`} alt='imgProfile' />
             </Link>
             <Link onClick={openProfilePage} to={`/profile/${userIdToFollower}`} className='container-fullname-in-center-in-people-likes-post-list'>
                 <b>{dataOfUserToFollowerByUserId.firstname} {dataOfUserToFollowerByUserId.lastname}</b>

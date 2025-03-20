@@ -1,4 +1,4 @@
-import { HashRouter, Routes, Route } from 'react-router-dom';
+import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import Signin from './components/Signin';
 import Signup from './components/Signup';
 import ForgotPassword from './components/ForgotPassword';
@@ -19,7 +19,7 @@ function App() {
   
   return (
     <SocketContext>
-      <HashRouter>
+      <BrowserRouter>
         <Routes>
           <Route path='/' element={localStorage.getItem('token') !== null ? <Media setLogoutStatus={setLogoutStatus}/> : <Signin />}></Route>
           <Route path='/signup' element={<Signup />}></Route>
@@ -34,7 +34,7 @@ function App() {
           <Route path='/profile/:id' element={<Profile setLogoutStatus={setLogoutStatus}/>}></Route>
           <Route path='/chat' element={<Chat setLogoutStatus={setLogoutStatus}/>}></Route>
         </Routes>
-      </HashRouter>
+      </BrowserRouter>
     </SocketContext>
   );
 }
